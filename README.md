@@ -63,13 +63,25 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 ## 📋 Usage
 
 1. **Select Text**: Copy the text you want to process to your clipboard.
+   <p align="center">
+     <img src="example/querypop_1.jpg" alt="Select a snippet of text in French" />
+   </p>
+
 2. **Run the Application:**
 
    ```bash
    python querypop.py
    ```
+   Or press the keybindings that trigger Copy and running of QueryPop script
 
-3. **Processing**: The application will automatically process the text and display the result in a pop-up window.
+3. **Processing**: The application will automatically process the text and display `⚙️ Processing` in a pop-up window.
+   <p align="center">
+     <img src="example/querypop_2.jpg" alt="⚙️ Processing.. displayed on GUI screen" />
+   </p>
+4. **Final Output**: The application will display the result in the same pop-up window.
+   <p align="center">
+     <img src="example/querypop_3.jpg" alt="Final output" />
+   </p>
 
 ## ❗ Error Handling
 
