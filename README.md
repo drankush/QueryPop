@@ -1,6 +1,7 @@
 <p align="center">
   <img src="querypop_logo_main.jpg" alt="QueryPop application logo" width="20%" height="20%" />
 </p>
+
 # QueryPop 🎉
 
 QueryPop is a Python application that sends selected text from the clipboard to a Large Language Model (LLM) for processing and displays the response in a user-friendly pop-up window. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses. This avoids need to getting distracted from what your are reading.
