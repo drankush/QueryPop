@@ -1,7 +1,7 @@
 
 # QueryPop 🎉
 
-QueryPop is a Python application that sends selected text from the clipboard to a Large Language Model (LLM) for processing and displays the response in a user-friendly pop-up window. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses. This avoids need to getting distracted form what your are reading.
+QueryPop is a Python application that sends selected text from the clipboard to a Large Language Model (LLM) for processing and displays the response in a user-friendly pop-up window. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses. This avoids need to getting distracted from what your are reading.
 
 ## ✨ Features 
 
@@ -114,6 +114,9 @@ To streamline the workflow, you can set up keyboard shortcuts to trigger the app
    - Open **System Preferences** > **Keyboard** > **Shortcuts**.
    - Select **Services** on the left.
    - Find the service you created ("Run QueryPop") and add a shortcut by clicking **Add Shortcut**.
+  
+3. **Binding to Cmd/Ctrl+C**:
+   - Note: macOS does not natively support binding the Cmd+C shortcut to a new function without overriding its default behavior. However, you can use a combination of other shortcuts or tools like Keyboard Maestro, BetterTouchTool to achieve similar functionality.
 
 ### 🪟 On Windows:
 
@@ -131,6 +134,22 @@ To streamline the workflow, you can set up keyboard shortcuts to trigger the app
    - Right-click on the newly created shortcut and select **Properties**.
    - In the **Shortcut** tab, click on the **Shortcut key** field and press the desired key combination (e.g., `Ctrl + Alt + Q`).
    - Click **Apply** and **OK**.
+  
+3. ### To Bind the Script to Ctrl+C using AutoHotkey:
+   - Install AutoHotkey if you haven't already.
+   - Create a new script with the following content:
+      ```ahk
+      ^c::
+      Send, ^c
+      Run, C:\path\to\python.exe C:\path\to\querypop.py, , Hide
+      return
+      ```
+      Replace `C:\path\to\python.exe` and `C:\path\to\querypop.py` with the actual paths to your Python executable and script.
+   - Save the script and run it. Now, pressing Ctrl+C will trigger the script.
+   
+      **Note:** The `^c::` line specifies that the script should trigger when Ctrl+C is pressed. The `Send, ^c` line simulates the Ctrl+C key press, and the `Run` line executes the Python script. The `, , Hide` parameter hides the command prompt window.
+  
+
 
 ## 🤝 Contributing
 
