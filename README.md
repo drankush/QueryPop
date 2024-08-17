@@ -73,7 +73,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 1. **Select Text**: Copy the text you want to process to your clipboard.
    <p align="center">
-     <img src="example/querypop_1.jpg" alt="Select a snippet of text in French" />
+     <img src="images/querypop_1.jpg" alt="Select a snippet of text in French" />
    </p>
 
 2. **Run the Application:**
@@ -83,7 +83,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    ```
    The application will show an Instruction prompt window.
    <p align="center">
-     <img src="example/querypop_4.jpg" alt="Instruction Prompt Window" />
+     <img src="images/querypop_4.jpg" alt="Instruction Prompt Window" />
    </p>
    
    - You can enter your custom prompt and press **OK**, which will be passed to the LLM along with text in the clipboard.
@@ -94,11 +94,11 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 4. **Processing**: The application will automatically process the text and display `⚙️ Processing` in a pop-up window.
    <p align="center">
-     <img src="example/querypop_2.jpg" alt="⚙️ Processing.. displayed on GUI screen" />
+     <img src="images/querypop_2.jpg" alt="⚙️ Processing.. displayed on GUI screen" />
    </p>
 5. **Final Output**: The application will display the result in the same pop-up window.
    <p align="center">
-     <img src="example/querypop_3.jpg" alt="Final output" />
+     <img src="images/querypop_3.jpg" alt="Final output" />
    </p>
 
 ## ❗ Error Handling
