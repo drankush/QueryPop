@@ -43,7 +43,7 @@ class Worker(QThread):
                 messages=[
                     {
                         "role": "system",
-                        "content": "You are a helpful AI assistant trained on large amounts of USMLE Step3 material.",
+                        "content": "You are a helpful AI assistant.",
                     },
                     {
                         "role": "user",
