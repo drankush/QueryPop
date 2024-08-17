@@ -16,13 +16,13 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 ## 🛠️ Requirements  
 
-
 - Python 3.11
 - `pyperclip` - For clipboard interaction.
 - `openai` - For OpenAI API integration.
 - `tkinter` - For GUI pop-ups.
 - `tkhtmlview` - For displaying HTML content in the GUI.
 - `markdown2` - For converting markdown to HTML.
+- `pillow` - For image display.
 
 ## 🚀 Installation 
 
@@ -36,12 +36,12 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 2. **Install the required Python packages:**
 
    ```bash
-   pip install pyperclip openai tkhtmlview markdown2
+   pip install pyperclip openai tkhtmlview markdown2 pillow
    ```
 
 ##  ⚙️ Configuration
 
-1. **API Details**: Set your API details in the `querypop.py` file. Accepts all OpenAI compatible API.
+1. **API Details**: Set your API details in the `config.py` file. Accepts all OpenAI compatible API.
 
    ```python
    OPENAI_API_URL = "https://api.openai.com/v1"
@@ -49,18 +49,24 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    MODEL = "gpt-4o"
    ```
 
-2. **Instruction Prompt**: Customize the instruction prompt by modifying the `INSTRUCTION_PROMPT` variable in the `querypop.py` file. 
+2. **Instruction Prompt**: Customize the instruction prompt by modifying the `INSTRUCTION_PROMPT` variable in the `config.py` file. 
 
-   **Sample Use Cases for Instruction Prompt:**
-   - **Summarization**: "Summarize the following text:"
-   - **Translation**: "Translate the following text into Spanish:"
-   - **Explanation**: "Explain the following text in simple terms:"
-   - **Question Answering**: "Answer the following question based on the text:"
-   - **Question Generation**: "Generate Questions based on the text:"
-   
    For example:
    ```python
-   INSTRUCTION_PROMPT = "Translate the following text into French:"
+    INSTRUCTION_PROMPTS = {
+        0: "Key Points Extraction: 'Extract key points from the following text:'",
+        1: "Summarization: 'Summarize the following text:'",
+        2: "Translation: 'Translate the following text into Spanish:'",
+        3: "Explanation: 'Explain the following text in detail:'",
+        4: "Question Answering: 'Answer the following question based on the text:'",
+        5: "Question Generation: 'Generate Questions based on the text:'",
+        6: "Paraphrasing: 'Paraphrase the following text:'",
+        7: "Sentiment Analysis: 'Determine the sentiment of the following text:'",
+        8: "Topic Modeling: 'Identify the topics in the following text:'",
+        9: "Text Simplification: 'Simplify the following text for easier understanding:'",
+        10: "Text Expansion: 'Expand the following text on the topic being discussed:'"
+    
+    }
    ```
 
 ## 📋 Usage
@@ -75,13 +81,18 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    ```bash
    python querypop.py
    ```
-   Or press the keybindings that trigger Copy and running of QueryPop script
+   The application will show an Instruction prompt window.
+   - You can enter your custom prompt and press **OK**, which will be passed to the LLM along with text in the clipboard.
+   - You can press 0-9 keys on your keyboard which will pass that Instruction prompt from the `config.py` along with the text in the clipboard.
+   - Key bindings are available only from 0-9, if you have more instructions prompts, you will have to manually scroll and press the button.
+   - If you wish to bypass this and want to hardcode a single instruction into the application, use `QueryPop v1`.
+  
 
-3. **Processing**: The application will automatically process the text and display `⚙️ Processing` in a pop-up window.
+4. **Processing**: The application will automatically process the text and display `⚙️ Processing` in a pop-up window.
    <p align="center">
      <img src="example/querypop_2.jpg" alt="⚙️ Processing.. displayed on GUI screen" />
    </p>
-4. **Final Output**: The application will display the result in the same pop-up window.
+5. **Final Output**: The application will display the result in the same pop-up window.
    <p align="center">
      <img src="example/querypop_3.jpg" alt="Final output" />
    </p>
