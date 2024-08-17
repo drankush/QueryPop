@@ -82,6 +82,9 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    python querypop.py
    ```
    The application will show an Instruction prompt window.
+   <p align="center">
+     <img src="example/querypop_4.jpg" alt="Instruction Prompt Window" />
+   </p>
    - You can enter your custom prompt and press **OK**, which will be passed to the LLM along with text in the clipboard.
    - You can press 0-9 keys on your keyboard which will pass that Instruction prompt from the `config.py` along with the text in the clipboard.
    - Key bindings are available only from 0-9, if you have more instructions prompts, you will have to manually scroll and press the button.
