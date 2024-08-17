@@ -24,7 +24,7 @@ def send_to_llm(text):
         response = client.chat.completions.create(
             model=config.MODEL,
             messages=[
-                {"role": "system", "content": "You are a helpful AI assistant trained on large amounts of USMLE Step3 material."},
+                {"role": "system", "content": "You are a helpful AI assistant."},
                 {"role": "user", "content": f"{INSTRUCTION_PROMPT}\n\n{text}"}
             ]
         )
