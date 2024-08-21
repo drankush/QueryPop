@@ -1,3 +1,60 @@
+DEFAULT_CONFIG_CONTENTS = """
+# Configuration file for the QueryPop application.
+
+# Users can customize the following settings:
+# - OpenAI API credentials
+# - Instruction prompts
+# - Application shortcut key combination
+
+# To edit this file, open it in a text editor. Be careful to preserve the correct syntax when making changes.
+
+OPENAI_API_URL = "https://api.openai.com/v1"
+OPENAI_API_KEY = "Your Key"
+MODEL = "Your Selected Model"
+
+# Enter Instruction Prompts in this format:
+# Button_Number: "Button_Name: 'Enter the descriptive prompt in detail'",
+# 0-9 keys will be mapped to the keyboard keys.
+
+INSTRUCTION_PROMPTS = {
+0: "Key Points Extraction: 'Extract key points from the following text:'",
+1: "Summarization: 'Summarize the following text:'",
+2: "Translation: 'Translate the following text into Spanish:'",
+3: "Explanation: 'Explain the following text in detail:'",
+4: "Question Answering: 'Answer the following question based on the text:'",
+5: "Question Generation: 'Generate Questions based on the text:'",
+6: "Paraphrasing: 'Paraphrase the following text:'",
+7: "Sentiment Analysis: 'Determine the sentiment of the following text:'",
+8: "Topic Modeling: 'Identify the topics in the following text:'",
+9: "Text Simplification: 'Simplify the following text for easier understanding:'",
+10: "Text Expansion: 'Expand the following text on the topic being discussed:'"
+}
+
+
+# Application Shortcut
+# Users can customize the shortcut key combination here.
+# The shortcut should be entered using the syntax recognized by the pynput library.
+# For example, "<ctrl>+<shift>+." represents the shortcut Ctrl+Shift+.
+# A list of available key names can be found at: https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
+
+
+APPLICATION_SHORTCUT = "<ctrl>+<shift>+."
+    
+""" 
+
+
+import os
+
+# Check if config.py exists
+if not os.path.exists('config.py'):
+    # Create config.py with default contents
+    with open('config.py', 'w') as f:
+        f.write(DEFAULT_CONFIG_CONTENTS)
+
+# Now you can safely import config
+import config
+
+
 import pyperclip
 from openai import OpenAI
 import tkinter as tk
@@ -5,12 +62,15 @@ from tkinter import messagebox, Button, Label, Toplevel, Text, Canvas, Frame, Sc
 from tkhtmlview import HTMLLabel
 from PIL import Image, ImageTk
 import os
+import time
 from datetime import datetime
 import markdown2
 import sys
-import config
+# import config
 from pynput import keyboard
+from pynput.keyboard import Key, Controller, Listener
 import threading
+import subprocess
 from queue import Queue
 import pystray
 from PIL import Image, ImageDraw, ImageFont
@@ -262,8 +322,26 @@ def main():
 
 
 def listen_for_shortcut():
+    keyboard_controller = Controller()
+
     def on_activate():
         print("Shortcut detected from listener thread!")
+        # Detect the operating system
+        if sys.platform == 'darwin':  # macOS
+            copy_shortcut = (Key.cmd, 'c')
+        else:  # Windows or Linux
+            copy_shortcut = (Key.ctrl, 'c')
+        
+        # Simulate the copy shortcut
+        with keyboard_controller.pressed(copy_shortcut[0]):
+            keyboard_controller.press(copy_shortcut[1])
+            keyboard_controller.release(copy_shortcut[1])
+            print("Simulated pressing of Cntrl+C")
+
+        # Wait for a short period to ensure the clipboard is updated
+        import time
+        time.sleep(0.1)
+        
         shortcut_detected.set()
         root.after(0, lambda: show_popup(get_selected_text()))
 
@@ -287,7 +365,21 @@ if __name__ == "__main__":
     y = (image.height - text_height) // 2
     draw.text((x, y), "QP", font=font, fill=(255, 255, 255)) # White text
 
+    def open_config():
+        config_path = os.path.join(os.getcwd(), "config.py")
+        if not os.path.exists(config_path):
+            with open(config_path, "w") as f:
+                f.write(DEFAULT_CONFIG_CONTENTS)
+        if sys.platform == "win32":
+            os.startfile(config_path)
+        else:
+            opener = "open" if sys.platform == "darwin" else "xdg-open"
+            subprocess.call([opener, config_path])
+
+
+
     icon = tk_icon("QP", image, "QueryPop", menu=pystray.Menu(
+        pystray.MenuItem("Open Config", open_config),
         pystray.MenuItem("Quit", quit_application),
     ))
     icon.run_detached()
