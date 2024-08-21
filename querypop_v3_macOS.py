@@ -82,6 +82,16 @@ from pystray import Icon as tk_icon
 INSTRUCTION_PROMPT = None
 shortcut_detected = threading.Event()  
 
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 def quit_application():
     print("Exiting application...")
     icon.stop()
@@ -148,7 +158,10 @@ def show_popup(selected_text):
         print("Creating popup window...")
         popup = Toplevel()
         popup.title("Instruction Prompt")
-        initial_width = 750
+        if os.name == "nt":
+            initial_width = 800
+        else:
+            initial_width = 750
         initial_height = 330
         popup.geometry(f"{initial_width}x{initial_height}")
 
@@ -168,7 +181,7 @@ def show_popup(selected_text):
         frame.pack(padx=10, pady=10)
 
         print("Loading and resizing image...")
-        image_path = "querypop_logo_main.jpg"
+        image_path = resource_path("querypop_logo_main.jpg")
         original_image = Image.open(image_path)
         width, height = original_image.size
         new_width = initial_width // 8
@@ -371,7 +384,8 @@ if __name__ == "__main__":
     # Create a text image
     image = Image.new("RGB", (64, 64), color=(0, 0, 0, 0))  # Transparent background
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype("Arial.ttf", size=32)  # Choose an available font
+    #font = ImageFont.truetype("Arial.ttf", size=32)  # Choose an available font
+    font = ImageFont.load_default()
     text_width, text_height = font.getmask("QP").size # Correct way to get text size
     x = (image.width - text_width) // 2
     y = (image.height - text_height) // 2
