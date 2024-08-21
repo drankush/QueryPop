@@ -23,6 +23,8 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 - `tkhtmlview` - For displaying HTML content in the GUI.
 - `markdown2` - For converting markdown to HTML.
 - `pillow` - For image display.
+- `psytray` - For tray icon.
+- `pynput` - For keyboard shortcut.
 
 ## 🚀 Installation 
 
@@ -36,7 +38,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 2. **Install the required Python packages:**
 
    ```bash
-   pip install pyperclip openai tkhtmlview markdown2 pillow
+   pip install -r requirements.txt
    ```
 
 ##  ⚙️ Configuration
@@ -68,10 +70,18 @@ QueryPop is a Python application that sends selected text from the clipboard to 
     
     }
    ```
+3. **Appplication Shortcut**: You can set your own Appplication Shortcut. The default is ```Ctrl+Shift+Q```.
+
+   ```python
+      APPLICATION_SHORTCUT = "<ctrl>+<shift>+Q"
+   ```
+
+   - A list of available key names can be found [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key).
+
 
 ## 📋 Usage
 
-1. **Select Text**: Copy the text you want to process to your clipboard.
+1. **Select Text**: Select the text you wish to send with your prompt. Press your configured Shortcut Key. It will automatically copy the selected text.
    <p align="center">
      <img src="images/querypop_1.jpg" alt="Select a snippet of text in French" />
    </p>
@@ -81,7 +91,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    ```bash
    python querypop.py
    ```
-   The application will show an Instruction prompt window.
+   The application will listen in the background for you to press the shortcut key and will open the  instruction prompt window.
    <p align="center">
      <img src="images/querypop_4.jpg" alt="Instruction Prompt Window" />
    </p>
@@ -113,60 +123,6 @@ If the directory does not exist, it will be created automatically. Each file is 
 ## ⌨️ Customizing Key Bindings
 
 To streamline the workflow, you can set up keyboard shortcuts to trigger the application after selecting text. 
-
-### 🍏 On macOS:
-
-1. **Create a Service in Automator**:
-   - Open **Automator** and choose **Service**.
-   - Set the service to receive **no input** in **any application**.
-   - Add the **Run Shell Script** action.
-   - Enter the following script, replacing `/path/to/querypop.py` with the path to your application script:
-
-     ```bash
-     /usr/bin/python3 /path/to/querypop.py
-     ```
-
-   - Save the service with a name like "Run QueryPop".
-
-2. **Set a Keyboard Shortcut**:
-   - Open **System Preferences** > **Keyboard** > **Shortcuts**.
-   - Select **Services** on the left.
-   - Find the service you created ("Run QueryPop") and add a shortcut by clicking **Add Shortcut**.
-  
-3. **Binding to Cmd/Ctrl+C**:
-   - Note: macOS does not natively support binding the Cmd+C shortcut to a new function without overriding its default behavior. However, you can use a combination of other shortcuts or tools like Keyboard Maestro, BetterTouchTool to achieve similar functionality.
-
-### 🪟 On Windows:
-
-1. **Create a Shortcut**:
-   - Right-click on your desktop and choose **New** > **Shortcut**.
-   - Enter the path to your Python executable and the script, e.g.:
-
-     ```bash
-     C:\path\to\python.exe C:\path\to\querypop.py
-     ```
-
-   - Name the shortcut (e.g., "Run QueryPop").
-
-2. **Set a Keyboard Shortcut**:
-   - Right-click on the newly created shortcut and select **Properties**.
-   - In the **Shortcut** tab, click on the **Shortcut key** field and press the desired key combination (e.g., `Ctrl + Alt + Q`).
-   - Click **Apply** and **OK**.
-  
-3. ### To Bind the Script to Ctrl+C using AutoHotkey:
-   - Install AutoHotkey if you haven't already.
-   - Create a new script with the following content:
-      ```ahk
-      ^c::
-      Send, ^c
-      Run, C:\path\to\python.exe C:\path\to\querypop.py, , Hide
-      return
-      ```
-      Replace `C:\path\to\python.exe` and `C:\path\to\querypop.py` with the actual paths to your Python executable and script.
-   - Save the script and run it. Now, pressing Ctrl+C will trigger the script.
-   
-      **Note:** The `^c::` line specifies that the script should trigger when Ctrl+C is pressed. The `Send, ^c` line simulates the Ctrl+C key press, and the `Run` line executes the Python script. The `, , Hide` parameter hides the command prompt window.
-  
 
 
 ## 🤝 Contributing
