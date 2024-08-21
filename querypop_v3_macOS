@@ -349,6 +349,18 @@ def listen_for_shortcut():
         h.join()
 
 
+def show_about():
+    messagebox.showinfo("About QueryPop", """
+        Developer Information:
+        Developed by: Dr. Ankush
+        🌐 www.drankush.com
+        ✉️ querypop@drankush.com
+
+        License:
+        MIT
+    """)
+
+
 if __name__ == "__main__":
     # Initialize the Tkinter application
     root = tk.Tk()
@@ -380,6 +392,7 @@ if __name__ == "__main__":
 
     icon = tk_icon("QP", image, "QueryPop", menu=pystray.Menu(
         pystray.MenuItem("Open Config", open_config),
+        pystray.MenuItem("About", show_about),
         pystray.MenuItem("Quit", quit_application),
     ))
     icon.run_detached()
