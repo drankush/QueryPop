@@ -45,14 +45,23 @@ APPLICATION_SHORTCUT = "<ctrl>+<shift>+."
 
 import os
 
-# Check if config.py exists
-if not os.path.exists('config.py'):
-    # Create config.py with default contents
-    with open('config.py', 'w') as f:
+
+if os.name == "nt":  # Windows
+    config_dir = os.path.join(os.environ["APPDATA"], "QUERYPOP")
+else:  # Assuming macOS or Linux
+    config_dir = os.path.join(os.path.expanduser("~"), ".querypop")
+
+if not os.path.exists(config_dir):
+    os.makedirs(config_dir)
+
+# Check if config.py exists in the config directory
+config_path = os.path.join(config_dir, "config.py")
+if not os.path.exists(config_path):
+    # Create config.py with default contents in the config directory
+    with open(config_path, "w") as f:
         f.write(DEFAULT_CONFIG_CONTENTS)
 
-# Now safely import config
-import config
+
 
 
 import pyperclip
@@ -73,8 +82,12 @@ import subprocess
 from queue import Queue
 import pystray
 from PIL import Image, ImageDraw, ImageFont
-from pystray import Icon as tk_icon 
+from pystray import Icon as tk_icon
+import importlib.util
 
+spec = importlib.util.spec_from_file_location("config", config_path)
+config = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(config)
 
 
 # Global variables
@@ -383,15 +396,15 @@ if __name__ == "__main__":
     # Create a text image
     image = Image.new("RGB", (64, 64), color=(0, 0, 0, 0))  # Transparent background
     draw = ImageDraw.Draw(image)
-    #font = ImageFont.truetype("Arial.ttf", size=32)  # Choose an available font
-    font = ImageFont.load_default()
+    font = ImageFont.truetype("Arial.ttf", size=32)  # Choose an available font
+    # font = ImageFont.load_default()
     text_width, text_height = font.getmask("QP").size # Correct way to get text size
     x = (image.width - text_width) // 2
     y = (image.height - text_height) // 2
     draw.text((x, y), "QP", font=font, fill=(255, 255, 255)) # White text
 
     def open_config():
-        config_path = os.path.join(os.getcwd(), "config.py")
+        global config_path  # Use the global config_path variable
         if not os.path.exists(config_path):
             with open(config_path, "w") as f:
                 f.write(DEFAULT_CONFIG_CONTENTS)
