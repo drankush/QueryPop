@@ -193,7 +193,7 @@ def show_popup(selected_text):
         frame.pack(padx=10, pady=10)
 
         print("Loading and resizing image...")
-        image_path = resource_path("querypop_logo_main.jpg")
+        image_path = resource_path("querypop_logo_main.png")
         original_image = Image.open(image_path)
         width, height = original_image.size
         new_width = initial_width // 8
