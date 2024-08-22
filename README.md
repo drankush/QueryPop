@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="querypop_logo_main.jpg" alt="QueryPop application logo" width="20%" height="20%" />
+  <img src="querypop_logo_main.png" alt="QueryPop application logo" width="20%" height="20%" />
 </p>
 
 # QueryPop 🎉
