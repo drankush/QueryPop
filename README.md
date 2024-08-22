@@ -28,18 +28,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 ## 🚀 Installation 
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/drankush/QueryPop.git
-   cd QueryPop
-   ```
-
-2. **Install the required Python packages:**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
+- Download the `.app` file for Mac or the `.exe` file for Windows from the [releases](https://github.com/drankush/QueryPop/releases).
 
 ##  ⚙️ Configuration
 
@@ -88,7 +77,8 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    ```
 
 2. **Edit ```config.py```:**
-   - In the tray icon ```QP```, click  ```Open Config``` and enter your API Details, Instruction Prompts and desired Application Shortcut.
+   - In the tray icon ```QP```, click  ```Open Config``` and enter your API Details, Instruction Prompts and desired Application Shortcut. Restart the application after saving the config.py file.
+     
 3. **Select Text**: Select the text you wish to send with your prompt. Press your configured Shortcut Key. It will automatically copy the selected text.
    <p align="center">
      <img src="images/querypop_1.jpg" alt="Select a snippet of text in French" />
