@@ -4,19 +4,19 @@
 
 # QueryPop 🎉
 
-QueryPop is a Python application that sends selected text from the clipboard to a Large Language Model (LLM) for processing and displays the response in a user-friendly pop-up window. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses. This avoids need to getting distracted from what your are reading.
+QueryPop is a Python application that sends selected text from the clipboard to a Large Language Model (LLM) along with user defined inputs for processing and displays the response in a user-friendly pop-up window. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses. This avoids need to getting distracted from what your are reading.
 
 ## ✨ Features 
 
-- **Clipboard Integration**: Automatically processes text from the clipboard.
-- **LLM Integration**: Sends text to a Large Language Model (e.g., OpenAI) for processing. Accepts all OpenAI compatible API.
+- **Clipboard Integration**: Automatically copies selected text and processes it from the clipboard.
+- **LLM Integration**: Sends text to a chosen Large Language Model by a provider (e.g., OpenAI) for processing. Accepts all OpenAI compatible API.
 - **Pop-Up Display**: Shows responses or errors in a graphical pop-up window.
 - **Markdown to HTML**: Converts markdown responses to HTML for enhanced readability.
 - **Response Saving**: Saves responses to a specified directory with timestamps.
 
 ## 🛠️ Requirements  
 
-- Python 3.11
+- Python 3.11+
 - `pyperclip` - For clipboard interaction.
 - `openai` - For OpenAI API integration.
 - `tkinter` - For GUI pop-ups.
@@ -43,7 +43,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 ##  ⚙️ Configuration
 
-1. **API Details**: Set your API details in the `config.py` file. Accepts all OpenAI compatible API.
+1. **API Details**: Set your API details in the `config.py` file. Accepts all OpenAI compatible API. You can open it by clicking ```Open Config``` in the tray icon.
 
    ```python
    OPENAI_API_URL = "https://api.openai.com/v1"
@@ -51,7 +51,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    MODEL = "gpt-4o"
    ```
 
-2. **Instruction Prompt**: Customize the instruction prompt by modifying the `INSTRUCTION_PROMPT` variable in the `config.py` file. 
+2. **Instruction Prompt**: Customize the instruction prompts by modifying the `INSTRUCTION_PROMPT` variable in the `config.py` file. Take care of following the exact format as provided below.
 
    For example:
    ```python
@@ -81,49 +81,46 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 ## 📋 Usage
 
-1. **Select Text**: Select the text you wish to send with your prompt. Press your configured Shortcut Key. It will automatically copy the selected text.
+1. **Run the Application:**
+   - The application will listen in the background for you to press the shortcut key and will open the instruction prompt window.
+
+3. **Select Text**: Select the text you wish to send with your prompt. Press your configured Shortcut Key. It will automatically copy the selected text.
    <p align="center">
      <img src="images/querypop_1.jpg" alt="Select a snippet of text in French" />
    </p>
 
-2. **Run the Application:**
+4. **Input the Instruction Prompt:**
 
    ```bash
    python querypop.py
    ```
-   The application will listen in the background for you to press the shortcut key and will open the  instruction prompt window.
+
    <p align="center">
      <img src="images/querypop_4.jpg" alt="Instruction Prompt Window" />
    </p>
    
-   - You can enter your custom prompt and press **OK**, which will be passed to the LLM along with text in the clipboard.
-   - You can press 0-9 keys on your keyboard which will pass that Instruction prompt from the `config.py` along with the text in the clipboard.
+   - You can enter your custom prompt and press **OK**, which will be passed to the LLM along with your selected text in the clipboard.
+   - You can press 0-9 keys on your keyboard which will pass that Instruction prompt mapped from the `config.py` along with the text in the clipboard.
    - Key bindings are available only from 0-9, if you have more instructions prompts, you will have to manually scroll and press the button.
    - If you wish to bypass this and want to hardcode a single instruction into the application, use `QueryPop v1`.
   
-
-4. **Processing**: The application will automatically process the text and display `⚙️ Processing` in a pop-up window.
+5. **Processing**: The application will automatically process the text and display `⚙️ Processing` in a pop-up window.
    <p align="center">
      <img src="images/querypop_2.jpg" alt="⚙️ Processing.. displayed on GUI screen" />
    </p>
-5. **Final Output**: The application will display the result in the same pop-up window.
+6. **Final Output**: The application will display the result in the same pop-up window.
    <p align="center">
      <img src="images/querypop_3.jpg" alt="Final output" />
    </p>
 
 ## ❗ Error Handling
 
-If no text is found in the clipboard, an error message will be displayed in a pop-up window.
+If no text is found in the clipboard, an error message will be displayed in a pop-up window. Errors related to the API will be displayed in the Processing window.
 
 ## 💾 Saving Responses
 
 Responses are saved as `.txt` files in the directory as defined in `QueryPop/responses`. 
 If the directory does not exist, it will be created automatically. Each file is named with a timestamp for easy tracking.
-
-## ⌨️ Customizing Key Bindings
-
-To streamline the workflow, you can set up keyboard shortcuts to trigger the application after selecting text. 
-
 
 ## 🤝 Contributing
 
