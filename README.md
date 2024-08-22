@@ -88,7 +88,7 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    <p align="center">
      <img src="images/querypop_2.jpg" alt="⚙️ Processing.. displayed on GUI screen" />
    </p>
-6. **Final Output**: The application will display the result in the same pop-up window.
+6. **Final Output**: The application will display the result in the same pop-up window. It will also be copied to your clipboard which you can directly paste using Ctrl/Cmd+V.
    <p align="center">
      <img src="images/querypop_3.jpg" alt="Final output" />
    </p>
