@@ -64,27 +64,30 @@ if not os.path.exists(config_path):
 
 
 
-import pyperclip
-from openai import OpenAI
-import tkinter as tk
-from tkinter import messagebox, Button, Label, Toplevel, Text, Canvas, Frame, Scrollbar
-from tkhtmlview import HTMLLabel
-from PIL import Image, ImageTk
-import os
-import time
+# Standard Library Imports
 from datetime import datetime
-import markdown2
-import sys
-from pynput import keyboard
-from pynput.keyboard import Key, Controller, Listener
-import threading
+import os
 import subprocess
+import sys
+import threading
 from queue import Queue
-import pystray
-from PIL import Image, ImageDraw, ImageFont
-from pystray import Icon as tk_icon
-import importlib.util
 
+# Third-Party Imports
+import importlib.util
+import markdown2
+from openai import OpenAI
+from PIL import Image, ImageDraw, ImageFont, ImageTk
+from pynput import keyboard
+from pynput.keyboard import Controller, Key
+import pyperclip
+import pystray
+from pystray import Icon as tk_icon
+from tkhtmlview import HTMLLabel
+import tkinter as tk
+from tkinter import Button, Canvas, Frame, Label, Scrollbar, Text, Toplevel, messagebox
+
+
+# Local Application Imports
 spec = importlib.util.spec_from_file_location("config", config_path)
 config = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(config)
