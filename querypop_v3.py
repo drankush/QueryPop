@@ -293,6 +293,7 @@ def show_response_window(selected_text):
         
         root.after(0, update_response, response)
         save_response(response)
+        pyperclip.copy(response)
 
     def save_response(response_text):
         print("Saving response to file...")
