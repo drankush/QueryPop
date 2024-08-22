@@ -51,7 +51,7 @@ if not os.path.exists('config.py'):
     with open('config.py', 'w') as f:
         f.write(DEFAULT_CONFIG_CONTENTS)
 
-# Now you can safely import config
+# Now safely import config
 import config
 
 
@@ -66,7 +66,6 @@ import time
 from datetime import datetime
 import markdown2
 import sys
-# import config
 from pynput import keyboard
 from pynput.keyboard import Key, Controller, Listener
 import threading
