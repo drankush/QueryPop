@@ -14,17 +14,6 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 - **Markdown to HTML**: Converts markdown responses to HTML for enhanced readability.
 - **Response Saving**: Saves responses to a specified directory with timestamps.
 
-## 🛠️ Requirements  
-
-- Python 3.11+
-- `pyperclip` - For clipboard interaction.
-- `openai` - For OpenAI API integration.
-- `tkinter` - For GUI pop-ups.
-- `tkhtmlview` - For displaying HTML content in the GUI.
-- `markdown2` - For converting markdown to HTML.
-- `pillow` - For image display.
-- `psytray` - For tray icon.
-- `pynput` - For keyboard shortcut.
 
 ## 🚀 Installation 
 
