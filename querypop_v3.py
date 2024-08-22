@@ -397,8 +397,10 @@ if __name__ == "__main__":
     # Create a text image
     image = Image.new("RGB", (64, 64), color=(0, 0, 0, 0))  # Transparent background
     draw = ImageDraw.Draw(image)
-    font = ImageFont.truetype("Arial.ttf", size=32)  # Choose an available font
-    # font = ImageFont.load_default()
+    if os.name == "nt":
+        font = ImageFont.load_default()
+    else:
+        font = ImageFont.truetype("Arial.ttf", size=32)  # Choose an available font
     text_width, text_height = font.getmask("QP").size # Correct way to get text size
     x = (image.width - text_width) // 2
     y = (image.height - text_height) // 2
