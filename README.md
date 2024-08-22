@@ -87,6 +87,8 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    python querypop.py
    ```
 
+2. **Edit ```config.py```:**
+   - In the tray icon ```QP```, click  ```Open Config``` and enter your API Details, Instruction Prompts and desired Application Shortcut.
 3. **Select Text**: Select the text you wish to send with your prompt. Press your configured Shortcut Key. It will automatically copy the selected text.
    <p align="center">
      <img src="images/querypop_1.jpg" alt="Select a snippet of text in French" />
@@ -111,6 +113,25 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    <p align="center">
      <img src="images/querypop_3.jpg" alt="Final output" />
    </p>
+
+
+
+### 🧷 Permissions
+
+To ensure **QueryPop** works correctly, you need to grant it the necessary permissions on macOS. Follow these steps:
+
+1. **Open** the **Apple Menu** () and go to **System Preferences**.
+2. Select **Security & Privacy**.
+3. Click on the **Privacy** tab.
+4. Scroll down and select **Input Monitoring** from the left-hand menu.
+5. Click the **lock icon** in the bottom left corner to enable changes. You may be prompted to enter your **administrator password**.
+6. Click the **+ button** below the list of applications.
+7. In the file picker dialog, navigate to the **QueryPop** executable and select it.
+8. After adding **QueryPop**, you will see a warning popup. Choose **Quit & Restart** to apply the changes.
+9. **Reopen** **QueryPop** to continue using the application with the appropriate permissions.
+
+
+
 
 ## ❗ Error Handling
 
