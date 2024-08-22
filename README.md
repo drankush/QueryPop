@@ -83,6 +83,9 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 1. **Run the Application:**
    - The application will listen in the background for you to press the shortcut key and will open the instruction prompt window.
+   ```bash
+   python querypop.py
+   ```
 
 3. **Select Text**: Select the text you wish to send with your prompt. Press your configured Shortcut Key. It will automatically copy the selected text.
    <p align="center">
@@ -90,10 +93,6 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    </p>
 
 4. **Input the Instruction Prompt:**
-
-   ```bash
-   python querypop.py
-   ```
 
    <p align="center">
      <img src="images/querypop_4.jpg" alt="Instruction Prompt Window" />
