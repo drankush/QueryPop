@@ -123,7 +123,7 @@ If the directory does not exist, it will be created automatically. Each file is 
 
 ## 🤝 Contributing
 
-Feel free to fork the repository and submit pull requests. If you encounter any issues or have suggestions for improvements, please open an issue.
+Feel free to fork the repository and submit pull requests. If you encounter any issues or have suggestions for improvements, please open an [issue](https://github.com/drankush/QueryPop/issues).
 
 ##  📜 License
 
