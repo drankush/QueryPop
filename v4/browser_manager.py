@@ -1,11 +1,10 @@
-# browser_manager.py
 import webbrowser
 import subprocess
 import sys
 import pyperclip
 from config_handler import load_config
 
-config = load_config()  # Load configuration
+config = load_config()
 
 class BrowserManager:
     def __init__(self):
@@ -15,7 +14,7 @@ class BrowserManager:
         user_message = f"{instruction_prompt}\n\n{text}"
         pyperclip.copy(user_message)
 
-        web_version = config.PREFER_WEBVERSION.lower() 
+        web_version = config.PREFER_WEBVERSION.lower()
         if web_version == "chatgpt":
             url = "https://chat.openai.com/"
         elif web_version == "claude":
@@ -35,7 +34,7 @@ class BrowserManager:
 
 class NewWindowBrowser(webbrowser.GenericBrowser):
     def open(self, url, new=2, autoraise=True):
-        input_delay = int(config.INPUT_DELAY)  # Assuming you have INPUT_DELAY in your config
+        input_delay = int(config.INPUT_DELAY) 
 
         try:
             window_bounds = [int(x.strip()) for x in config.BROWSER_WINDOW_SIZE[1:-1].split(',')]
@@ -65,10 +64,16 @@ class NewWindowBrowser(webbrowser.GenericBrowser):
                     end tell
                 end tell
             '''
-            chrome_result = subprocess.run(["osascript", "-e", chrome_script], stderr=subprocess.DEVNULL)
 
-            # If Chrome is not found, try Safari
-            if chrome_result.returncode != 0: 
+            chrome_process = subprocess.Popen(["osascript", "-e", chrome_script], stderr=subprocess.PIPE)
+            stderr_output, _ = chrome_process.communicate()
+            chrome_result = chrome_process.returncode
+
+            # Handle potential NoneType for stderr_output
+            if stderr_output is not None and "not found" in stderr_output.decode('utf-8').lower():
+
+                print("Chrome not found. Trying Safari...")
+
                 safari_script = f'''
                     tell application "Safari"
                         activate
@@ -86,13 +91,19 @@ class NewWindowBrowser(webbrowser.GenericBrowser):
                     safari_script += 'keystroke return using {command down}'
                 elif config.PREFER_WEBVERSION.lower() in ["gemini", "meta"]:
                     safari_script += 'keystroke return'
-                safari_script += '''    
+                safari_script += '''
                         end tell
                     end tell
                 '''
-                safari_result = subprocess.run(["osascript", "-e", safari_script], stderr=subprocess.DEVNULL)
+                
+                safari_process = subprocess.Popen(["osascript", "-e", safari_script], stderr=subprocess.PIPE)
+                stderr_output, _ = safari_process.communicate()
+                safari_result = safari_process.returncode
 
-                if safari_result.returncode != 0:
+                # Check stderr_output for Safari as well
+                if stderr_output is not None and "not found" in stderr_output.decode('utf-8').lower():
                     print("Neither Chrome nor Safari found. Please install a supported browser.")
+            else:  # Chrome likely opened successfully
+                print("Chrome opened successfully (potentially with warnings).") 
         else:
             print("Web version is currently only supported on macOS.")
