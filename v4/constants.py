@@ -1,0 +1,6 @@
+APPLICATION_NAME = "QueryPop"
+VERSION = "4.0.0"
+DEVELOPER = "Dr. Ankush"
+WEBSITE = "www.drankush.com"
+EMAIL = "querypop@drankush.com"
+LICENSE = "MIT"
