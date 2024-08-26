@@ -5,7 +5,7 @@ import sys
 import pyperclip
 from config_handler import load_config
 
-config = load_config()  # Load your configuration
+config = load_config()  # Load configuration
 
 class BrowserManager:
     def __init__(self):
