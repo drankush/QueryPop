@@ -114,19 +114,46 @@ QueryPop is a Python application that sends selected text from the clipboard to 
 
 
 
-### 🧷 Permissions
+## 🧷 Permissions
 
-To ensure **QueryPop** works correctly, you need to grant it the necessary permissions on macOS. Follow these steps:
+To ensure QueryPop works correctly, you need to grant it the necessary permissions on macOS. Follow these steps:
 
-1. **Open** the **Apple Menu** () and go to **System Preferences**.
-2. Select **Security & Privacy**.
-3. Click on the **Privacy** tab.
-4. Scroll down and select **Input Monitoring** from the left-hand menu.
-5. Click the **lock icon** in the bottom left corner to enable changes. You may be prompted to enter your **administrator password**.
-6. Click the **+ button** below the list of applications.
-7. In the file picker dialog, navigate to the **QueryPop** executable and select it.
-8. After adding **QueryPop**, you will see a warning popup. Choose **Quit & Restart** to apply the changes.
-9. **Reopen** **QueryPop** to continue using the application with the appropriate permissions.
+1. **Open the Apple Menu () and go to System Preferences.**
+2. **Select Security & Privacy.**
+3. **Click on the Privacy tab.**
+
+### Input Monitoring
+- **Purpose:** To monitor when the Shortcut key is pressed and the Instruction prompt window is opened.
+- **How to Grant:**
+  1. Scroll down and select **Input Monitoring** from the left-hand menu.
+  2. Click the lock icon in the bottom left corner to enable changes. You may be prompted to enter your administrator password.
+  3. Click the **+** button below the list of applications.
+  4. In the file picker dialog, navigate to the QueryPop executable and select it.
+  5. After adding QueryPop, you will see a warning popup. Choose **Quit & Restart** to apply the changes.
+  6. Reopen QueryPop to continue using the application with the appropriate permissions.
+
+### Accessibility
+- **Purpose:** To simulate keystrokes in the Pop-up windows and to fetch selected text into the clipboard.
+- **How to Grant:**
+  1. Scroll down and select **Accessibility** from the left-hand menu.
+  2. Click the lock icon in the bottom left corner to enable changes. You may be prompted to enter your administrator password.
+  3. Click the **+** button below the list of applications.
+  4. In the file picker dialog, navigate to the QueryPop executable and select it.
+  5. After adding QueryPop, you will see a warning popup. Choose **Quit & Restart** to apply the changes.
+  6. Reopen QueryPop to continue using the application with the appropriate permissions.
+
+### Automation
+- **Purpose:** To interact with web versions of LLMs through Google Chrome, Safari (for showing pop-ups), and System Events (for triggering AppleScript).
+- **How to Grant:**
+  - When you run QueryPop for the first time, you will receive prompts to grant access to **System Events**, **Google Chrome**, and **Safari**.
+  - The prompt will say something like:
+    ```
+    "QueryPop" wants access to control "System Events". 
+    Allowing control will provide access to documents and data in "System Events", and to perform actions within that app.
+    ```
+  - Click **OK** to grant the necessary permissions.
+  - Ensure you do this for all the required applications when prompted.
+
 
 
 
