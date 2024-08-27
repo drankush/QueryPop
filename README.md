@@ -48,10 +48,10 @@ QueryPop is a Python application that sends selected text from the clipboard to 
     
     }
    ```
-3. **Appplication Shortcut**: You can set your own Appplication Shortcut. The default is ```Ctrl+Shift+Q```.
+3. **Appplication Shortcut**: You can set your own Appplication Shortcut. The default is ```Ctrl+Shift+.```.
 
    ```python
-      APPLICATION_SHORTCUT = "<ctrl>+<shift>+Q"
+      APPLICATION_SHORTCUT = "<ctrl>+<shift>+."
    ```
 
    - A list of available key names can be found [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key).
