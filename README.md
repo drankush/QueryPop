@@ -57,6 +57,26 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    - A list of available key names can be found [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key).
 
 
+## 🧪 Options for v4.0-beta
+
+*The v4 will provide optional support to web-based LLM service. It expects users to have Chrome browser installed, logged in to their account and granted [permissions](https://github.com/drankush/QueryPop#-permissions) to accessibility features in built in OS. As you cannot automatically or programmatically extract data or output, this approach is completely compliant with TOS of all LLM service providers.*
+
+4. **Preferred Web Version**: If instead of using API service, you wish to use the web version of LLM service you can input options for the supported services. Currently ```chatgpt```, ```claude```, ```gemini```, ```meta``` are supported. Leave blank or set to any other value to use API keys.
+   ```python
+      PREFER_WEBVERSION = "chatgpt"
+   ```  
+
+5. **Input Delay for Web Version**: The application tries to input the selected text and the chosen custom intructions using accessibilty features in built in OS. You can change this value depending on your internet speed, after guaging how long the page takes to load.
+   ```python
+      INPUT_DELAY = "5"  # (in seconds)
+   ```
+   
+6. **Browser Window Size**: This takes the format: {x-coordinate, y-coordinate, width, height}
+   ```python
+      BROWSER_WINDOW_SIZE = "{100,50,400,700}" # Keep no spaces.
+   ```
+
+
 ## 📋 Usage
 
 1. **Run the Application:**
