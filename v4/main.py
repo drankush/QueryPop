@@ -12,6 +12,7 @@ from clipboard_utils import get_selected_text
 from ui_manager import UIManager
 from utils import quit_application, show_about, open_config
 
+
 config = load_config()
 
 # Global variables
@@ -24,16 +25,6 @@ class Application:
         self.root.geometry("1x1")
         self.ui_manager = UIManager(self.root)
 
-    def on_activate(self):
-        selected_text = get_selected_text()
-        if not selected_text.strip():
-            self.ui_manager.error_popup("Select a text snippet to send to LLM.")
-            return
-        self.root.after(0, lambda: self.ui_manager.show_popup(selected_text))
-
-    def listen_for_shortcut(self):
-        with keyboard.GlobalHotKeys({config.APPLICATION_SHORTCUT: self.on_activate}) as h:
-            h.join()
 
     def listen_for_shortcut(self):
         keyboard_controller = Controller()
@@ -47,7 +38,7 @@ class Application:
                 copy_shortcut = (Key.ctrl, 'c')
             
             # Simulate the copy shortcut
-            with keyboard_controller.pressed(copy_shortcut[0]):
+            with keyboard_controller.pressed(copy_shortcut[0]): #commented for debugging
                 keyboard_controller.press(copy_shortcut[1])
                 keyboard_controller.release(copy_shortcut[1])
                 print("Simulated pressing of Cntrl+C")
@@ -62,6 +53,11 @@ class Application:
         # Pass 'self' to on_activate:
         with keyboard.GlobalHotKeys({config.APPLICATION_SHORTCUT: lambda *args: on_activate(self)}) as h: 
             h.join() 
+
+
+
+
+
 
     def run(self):
         image_path = get_resource_path("querypop_logo_main.png")
@@ -84,3 +80,7 @@ class Application:
 if __name__ == "__main__":
     app = Application()
     app.run()
+
+
+
+
