@@ -25,7 +25,7 @@ class UIManager:
         print("Displaying popup window for instruction prompt...")
 
         def on_ok():
-            instruction_prompt = config.INSTRUCTION_PROMPTS.get("1.0", "end-1c")
+            instruction_prompt = instruction_entry.get("1.0", "end-1c")
             print(f"Instruction Prompt set: {instruction_prompt}")
             popup.destroy()
             self.root.after(0, lambda: self.handle_llm_interaction(selected_text, instruction_prompt))
