@@ -28,6 +28,8 @@ class BrowserManager:
             url = "https://gemini.google.com/"
         elif web_version == "meta":
             url = "https://meta.ai/"
+        elif web_version == "perplexity":
+            url = "https://www.perplexity.ai/"
         else:
             print("Invalid PREFER_WEBVERSION in config.py.")
             return
@@ -95,8 +97,9 @@ class NewWindowBrowser(webbrowser.GenericBrowser):
                 # Short pause
                 time.sleep(0.5)
 
-                # Claude-specific: Press Tab after pasting
-                if web_version == "claude":
+                # Claude and ChatGPT-specific: Press Tab after pasting
+                if web_version in ["claude", "chatgpt"]:
+                    time.sleep(0.5)  # Add a slight delay to ensure proper focus
                     keyboard.press(Key.tab)
                     keyboard.release(Key.tab)
 
