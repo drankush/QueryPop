@@ -37,9 +37,9 @@ INSTRUCTION_PROMPTS = {
 }
 
 # Preferred Web Version (if applicable)
-# Options: "chatgpt", "claude", "gemini", "meta" 
+# Options: "chatgpt", "claude", "gemini", "meta", "perplexity"
 # Leave blank or set to any other value to use API keys.
-PREFER_WEBVERSION = "No" 
+PREFER_WEBVERSION = "chatgpt" 
 
 # Input Delay for Web Version (in seconds)
 INPUT_DELAY = "5"
@@ -57,8 +57,8 @@ BROWSER_WINDOW_SIZE = "{100,50,400,700}" # Keep no spaces
 # The shortcut should be entered using the syntax recognized by the pynput library.
 # For example, "<ctrl>+<shift>+." represents the shortcut Ctrl+Shift+.
 # A list of available key names can be found at: https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
-
-APPLICATION_SHORTCUT = "<ctrl>+<shift>+." 
+# Look out for conflicts with the application you will be using.
+APPLICATION_SHORTCUT = "<ctrl>+`" # The default is Ctrl + ` (the backtick key, above the tab key). 
 """ 
 
 
