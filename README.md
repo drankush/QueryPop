@@ -4,7 +4,7 @@
 
 # QueryPop 🎉
 
-QueryPop is a Python application called with a hotkey, that sends selected text (optional) from the clipboard to a Large Language Model (LLM) along with selected customizable inputs (selected from a pop-up) for processing and displays the response in a user-friendly pop-up window. Users can choose webversions of major LLM providers or API key. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses (when using API key). This avoids need to getting distracted from what your are reading. Read comprehensive use [cases](https://github.com/drankush/QueryPop/#-use-cases).
+QueryPop is a Python application called with a hotkey, that sends selected text (optional) from the clipboard to a Large Language Model (LLM) along with selected customizable inputs (selected from a pop-up) for processing and displays the response in a user-friendly pop-up window. Users can choose webversions of major LLM providers or API key. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses (when using API key). This avoids need to getting distracted from what your are reading. Read comprehensive [use cases](https://github.com/drankush/QueryPop/#-use-cases).
 
 ## ✨ Features 
 
