@@ -50,7 +50,7 @@ INPUT_DELAY = "5"
 # - y-coordinate: Vertical position of the window's top-left corner from the top edge of the screen.
 # - width: Width of the browser window in pixels.
 # - height: Height of the browser window in pixels.
-BROWSER_WINDOW_SIZE = "{100, 50, 400, 700}" 
+BROWSER_WINDOW_SIZE = "{100,50,400,700}" # Keep no spaces
 
 # Application Shortcut
 # Users can customize the shortcut key combination here.
