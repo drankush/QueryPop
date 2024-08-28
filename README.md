@@ -4,7 +4,7 @@
 
 # QueryPop 🎉
 
-QueryPop is a Python application that sends selected text from the clipboard to a Large Language Model (LLM) along with user defined inputs for processing and displays the response in a user-friendly pop-up window. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses. This avoids need to getting distracted from what your are reading.
+QueryPop is a Python application called with a hotkey, that sends selected text (optional) from the clipboard to a Large Language Model (LLM) along with selected customizable inputs (selected from a pop-up) for processing and displays the response in a user-friendly pop-up window. Users can choose webversions of major LLM providers or API key. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses (when using API key). This avoids need to getting distracted from what your are reading. Read comprehensive use [cases](https://github.com/drankush/QueryPop/#-use-cases).
 
 ## ✨ Features 
 
@@ -133,6 +133,49 @@ QueryPop is a Python application that sends selected text from the clipboard to 
    </p>
 
 
+## 💡 Use Cases
+
+QueryPop is a versatile tool that can significantly boost your productivity in various scenarios. 
+- If you are using API the pop-up response is also returned to clipboard and can directly pasted (Cmd/Ctrl+V) in your application. 
+- You can always customise your frequently used instruction prompt and write as detail as required.
+- You can also choose enter your own prompt in the pop-up window.
+*These are some of the use cases:*
+
+1. **Instant Code Documentation**
+   While coding, select a complex function or class and use QueryPop to generate comprehensive documentation. This can include explaining the purpose, parameters, return values, and potential edge cases, saving you time in writing detailed comments.
+
+2. **Quick Language Translation**
+   When reading articles or documents in a foreign language, highlight phrases or paragraphs and use QueryPop to get instant translations. This eliminates the need to switch between applications or browser tabs, maintaining your focus on the content. A great tool for language learners.
+
+3. **Summarizing Long Articles**
+   When faced with a lengthy article or report, select the entire text and use QueryPop to generate a concise summary. This allows you to quickly grasp the main points without reading the entire piece, perfect for research or staying updated in your field. Use prompts like "Create bullet points from this text" or "Summarize the main arguments."
+
+4. **Explaining Complex Concepts**
+   Encounter a difficult concept or technical term? Highlight it and use QueryPop to get a simplified explanation. This is particularly useful when reading academic papers or technical documentation, helping you understand complex ideas without extensive searching.
+
+5. **Grammar and Style Improvements**
+   While writing emails, reports, or articles, select paragraphs and use QueryPop to suggest grammar improvements or style enhancements. This acts as an instant writing assistant, helping you communicate more effectively without switching to dedicated grammar-checking tools.
+
+6. **Generating Creative Ideas**
+   When brainstorming for a project or content creation, use QueryPop to generate creative ideas based on your input. For example, enter a topic and ask for "10 unique blog post ideas about [topic]". This can help overcome writer's block and spark new perspectives.
+
+7. **Quick Fact-Checking**
+   While reading news articles or social media posts, highlight claims or statistics and use QueryPop to fact-check or provide additional context. This helps you stay informed and critical of the information you consume without disrupting your reading flow. Keep in mind AI can make mistakes.
+
+8. **Code Debugging Assistant**
+   When stuck on a coding problem, select the problematic code snippet and use QueryPop to get suggestions for debugging or optimization. While it won't replace thorough debugging, it can provide quick insights or point you in the right direction.
+
+9. **Instant Research Assistance**
+   While working on academic papers or reports, use QueryPop to quickly find relevant sources or additional information on a topic. Highlight key terms or research questions to get suggestions for further reading or potential citations (useful when used with LLMs who have web-access).
+
+10. **Study Aid**
+	Use QueryPop to create flashcards, concept maps, or study guides as you read your books, pdfs, research papers, making learning more efficient and effective. You can directly select all the text and ask it generate multiple choice questions, or other questions types for more comprehensive learning.
+
+11. **Email and Message Crafting**
+
+	You need to compose a professional email, or repititive mail. For example select the Order No and trigger the hotkey and then select predefined prompt button like "Write a email to John Doe LLC requesting for invoice for order no:". 
+
+These use cases demonstrate how QueryPop can seamlessly integrate into your workflow, providing instant assistance and information across various tasks and domains, ultimately enhancing your productivity and efficiency.
 
 ## 🧷 Permissions
 
