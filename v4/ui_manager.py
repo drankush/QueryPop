@@ -160,7 +160,7 @@ class UIManager:
         response_window.mainloop()
 
     def handle_llm_interaction(self, selected_text, instruction_prompt):
-        if config.PREFER_WEBVERSION.lower() in ["chatgpt", "claude", "gemini", "meta"]:
+        if config.PREFER_WEBVERSION.lower() in ["chatgpt", "claude", "gemini", "meta", "perplexity"]:
             print(f"Web version preferred: {config.PREFER_WEBVERSION}. Calling show_browser_window.")
             self.browser_manager.show_browser_window(selected_text, instruction_prompt)
         else:
