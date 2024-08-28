@@ -2,7 +2,10 @@ import webbrowser
 import subprocess
 import sys
 import pyperclip
+import time
+from pynput.keyboard import Controller, Key
 from config_handler import load_config
+
 
 config = load_config()
 
@@ -23,6 +26,8 @@ class BrowserManager:
             url = "https://gemini.google.com/"
         elif web_version == "meta":
             url = "https://meta.ai/"
+        elif web_version == "perplexity":
+            url = "https://www.perplexity.ai/"
         else:
             print("Invalid PREFER_WEBVERSION in config.py.")
             return
@@ -32,16 +37,17 @@ class BrowserManager:
         except Exception as e:
             print(f"Error opening browser: {e}")
 
+
+
 class NewWindowBrowser(webbrowser.GenericBrowser):
     def open(self, url, new=2, autoraise=True):
         input_delay = int(config.INPUT_DELAY) 
 
         try:
             window_bounds = [int(x.strip()) for x in config.BROWSER_WINDOW_SIZE[1:-1].split(',')]
-            window_size = f"{{ {window_bounds[0]}, {window_bounds[1]}, {window_bounds[2]}, {window_bounds[3]} }}"
         except Exception as e:
             print(f"Error parsing BROWSER_WINDOW_SIZE from config.py: {e}")
-            window_size = "{100, 50, 400, 700}" 
+            window_bounds = [100, 50, 400, 700]  # Default window bounds
 
         if sys.platform == 'darwin':  # macOS
             # Try opening in Chrome first
@@ -50,28 +56,15 @@ class NewWindowBrowser(webbrowser.GenericBrowser):
                     activate
                     make new window
                     set URL of active tab of window 1 to "{url}"
-                    set bounds of window 1 to {{{", ".join(map(str, window_bounds))}}} 
+                    set bounds of window 1 to {{{", ".join(map(str, window_bounds))}}}
                     delay {input_delay}
-                    tell application "System Events"
-                        keystroke "v" using command down
-                        delay 1 
-                        '''
-            if config.PREFER_WEBVERSION.lower() == "chatgpt":
-                chrome_script += 'keystroke return using {command down}'
-            elif config.PREFER_WEBVERSION.lower() in ["gemini", "meta"]:
-                chrome_script += 'keystroke return'
-            chrome_script += '''
-                    end tell
                 end tell
             '''
-
             chrome_process = subprocess.Popen(["osascript", "-e", chrome_script], stderr=subprocess.PIPE)
             stderr_output, _ = chrome_process.communicate()
             chrome_result = chrome_process.returncode
 
-            # Handle potential NoneType for stderr_output
-            if stderr_output is not None and "not found" in stderr_output.decode('utf-8').lower():
-
+            if chrome_result != 0:
                 print("Chrome not found. Trying Safari...")
 
                 safari_script = f'''
@@ -81,29 +74,64 @@ class NewWindowBrowser(webbrowser.GenericBrowser):
                             set current tab to (make new tab)
                             set the URL of the current tab to "{url}"
                         end tell
-                        set bounds of window 1 to {{{", ".join(map(str, window_bounds))}}} 
+                        set bounds of window 1 to {{{", ".join(map(str, window_bounds))}}}
                         delay {input_delay}
-                        tell application "System Events"
-                            keystroke "v" using command down
-                            delay 1
-                            '''
-                if config.PREFER_WEBVERSION.lower() == "chatgpt":
-                    safari_script += 'keystroke return using {command down}'
-                elif config.PREFER_WEBVERSION.lower() in ["gemini", "meta"]:
-                    safari_script += 'keystroke return'
-                safari_script += '''
-                        end tell
                     end tell
                 '''
-                
                 safari_process = subprocess.Popen(["osascript", "-e", safari_script], stderr=subprocess.PIPE)
                 stderr_output, _ = safari_process.communicate()
                 safari_result = safari_process.returncode
 
-                # Check stderr_output for Safari as well
-                if stderr_output is not None and "not found" in stderr_output.decode('utf-8').lower():
+                if safari_result != 0:
                     print("Neither Chrome nor Safari found. Please install a supported browser.")
-            else:  # Chrome likely opened successfully
-                print("Chrome opened successfully (potentially with warnings).") 
+                else:
+                    print("Safari opened successfully.")
+            else:
+                print("Chrome opened successfully.")
+            
+            # Create a keyboard controller
+            keyboard = Controller()
+
+            # Additional actions based on web version
+            web_version = config.PREFER_WEBVERSION.lower()
+            if web_version == "claude":
+                for _ in range(16):  # Press tab 16 times
+                    keyboard.press(Key.tab)
+                    keyboard.release(Key.tab)
+
+            # Ensure a short delay before pasting to avoid multiple pastes
+            time.sleep(0.5)
+
+            # Simulate Cmd+V to paste (for all versions)
+            with keyboard.pressed(Key.cmd):
+                keyboard.press('v')
+                keyboard.release('v')
+
+            # Short pause
+            time.sleep(0.5)
+
+            # Claude and ChatGPT-specific: Press Tab after pasting
+            if web_version in ["claude", "chatgpt"]:
+                time.sleep(0.5)  # Add a slight delay to ensure proper focus
+                keyboard.press(Key.tab)
+                keyboard.release(Key.tab)
+
+            # Simulate Enter for all versions
+            keyboard.press(Key.enter)
+            keyboard.release(Key.enter)
+
+            # Added Redundant Actions as a Safety Net for Claude due to quirky web interface. Wierdly it works!
+            if web_version == "claude":
+                with keyboard.pressed(Key.cmd):
+                    keyboard.press('v')
+                    keyboard.release('v')
+                time.sleep(0.5)  # Add a slight delay to ensure proper focus
+                keyboard.press(Key.tab)
+                keyboard.release(Key.tab)
+                time.sleep(0.5)  # Add a slight delay to ensure proper focus
+            # Simulate Enter 
+                keyboard.press(Key.enter)
+                keyboard.release(Key.enter)
         else:
-            print("Web version is currently only supported on macOS.")
+            print("Web version is currently only supported on Chrome and Safari on macOS.")
+
