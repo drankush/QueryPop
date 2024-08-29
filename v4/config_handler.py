@@ -14,7 +14,7 @@ DEFAULT_CONFIG_CONTENTS = """
 
 # To edit this file, open it in a text editor. Be careful to preserve the correct syntax when making changes.
 
-OPENAI_API_URL = "https://api.openai.com/v1"
+OPENAI_API_URL = "https://api.openai.com/v1" # Use any OpenAI compatible API
 OPENAI_API_KEY = "Your Key"
 MODEL = "Your Selected Model"
 
@@ -22,22 +22,25 @@ MODEL = "Your Selected Model"
 # Button_Number: "Button_Name: 'Enter the descriptive prompt in detail'",
 # 0-9 keys will be mapped to the keyboard keys.
 
+
 INSTRUCTION_PROMPTS = {
 0: "Key Points Extraction: 'Extract key points from the following text:'",
-1: "Summarization: 'Summarize the following text:'",
-2: "Translation: 'Translate the following text into Spanish:'",
-3: "Explanation: 'Explain the following text in detail:'",
-4: "Question Answering: 'Answer the following question based on the text:'",
-5: "Question Generation: 'Generate Questions based on the text:'",
+1: "Statistical Analysis Plan: 'Develop a statistical analysis plan based on the following data:'",
+2: "Translation: 'Translate the following text into English:'",
+3: "Ethical Considerations: 'Discuss ethical considerations related to the following study:'",
+4: "Concept Simplification: 'Simplify the following concept for easier understanding:'",
+5: "Study Quiz: 'Create a 5-question multiple-choice quiz based on the following information:'",
 6: "Paraphrasing: 'Paraphrase the following text:'",
-7: "Sentiment Analysis: 'Determine the sentiment of the following text:'",
-8: "Topic Modeling: 'Identify the topics in the following text:'",
-9: "Text Simplification: 'Simplify the following text for easier understanding:'",
-10: "Text Expansion: 'Expand the following text on the topic being discussed:'"
+7: "Analogies: 'Create an analogy to explain the following concept:'",
+8: "Counterargument: 'Provide a well-reasoned counterargument to the following statement or claim:'",
+9: "Make Mnemonic: 'Create a mnemonic device to help remember the following information:'",
+10: "Real-World Application: 'Explain how the following concept can be applied in real life:'",
+11: "Code Optimization: 'Optimize the following code for better performance:'",
+12: "Code Commenting: 'Add meaningful comments to the following code to improve readability:'"
 }
 
 # Preferred Web Version (if applicable)
-# Options: "chatgpt", "claude", "gemini", "meta", "perplexity"
+# Options: "chatgpt", "claude", "gemini", "meta", "copilot", "blackbox", "you", "mistral". For automated input with blackbox, you, mistral use width to >870.
 # Leave blank or set to any other value to use API keys.
 PREFER_WEBVERSION = "chatgpt" 
 
@@ -50,7 +53,9 @@ INPUT_DELAY = "5"
 # - y-coordinate: Vertical position of the window's top-left corner from the top edge of the screen.
 # - width: Width of the browser window in pixels.
 # - height: Height of the browser window in pixels.
-BROWSER_WINDOW_SIZE = "{100,50,400,700}" # Keep no spaces
+# - For blackbox, you, mistral use width >870; to be able to automate input.
+BROWSER_WINDOW_SIZE = "{100,50,450,700}" 
+
 
 # Application Shortcut
 # Users can customize the shortcut key combination here.
@@ -58,13 +63,14 @@ BROWSER_WINDOW_SIZE = "{100,50,400,700}" # Keep no spaces
 # For example, "<ctrl>+<shift>+." represents the shortcut Ctrl+Shift+.
 # A list of available key names can be found at: https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
 # Look out for conflicts with the application you will be using.
-APPLICATION_SHORTCUT = "<ctrl>+`" # The default is Ctrl + ` (the backtick key, above the tab key). 
+APPLICATION_SHORTCUT = "<cmd>+'" # The default shortcut is now Command + ' (the apostrophe key) for macOS to avoid conflits.
+
 """ 
 
 
 
 def open_config():
-    global config_path  # Use the global config_path variable
+    global config_path 
     if not os.path.exists(config_path):
         with open(config_path, "w") as f:
             f.write(DEFAULT_CONFIG_CONTENTS)
@@ -75,9 +81,9 @@ def open_config():
         subprocess.call([opener, config_path])
 
 def get_config_path():
-    if os.name == "nt":  # Windows
+    if os.name == "nt":
         config_dir = os.path.join(os.environ["APPDATA"], "QUERYPOP")
-    else:  # Assuming macOS or Linux
+    else: 
         config_dir = os.path.join(os.path.expanduser("~"), ".querypop")
     
     if not os.path.exists(config_dir):
@@ -85,8 +91,10 @@ def get_config_path():
     
     return os.path.join(config_dir, "config.py")
 
+config_path = get_config_path()  # Initialize config_path globally
+
 def load_config():
-    config_path = get_config_path()
+    global config_path
     if not os.path.exists(config_path):
         with open(config_path, "w") as f:
             f.write(DEFAULT_CONFIG_CONTENTS)
