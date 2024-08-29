@@ -1,27 +1,31 @@
 import os
 import sys
-
 import tkinter as tk
 from tkinter import Toplevel, Label, Button, Frame, Canvas, Scrollbar, Text, messagebox
 from tkhtmlview import HTMLLabel
 import markdown2
 from PIL import Image, ImageTk
-from queue import Queue
 import threading
 
 from config_handler import load_config, get_resource_path
 from llm_manager import LLMManager
 from browser_manager import BrowserManager
 
-config = load_config()
 
 class UIManager:
     def __init__(self, root):
         self.root = root
-        self.llm_manager = LLMManager()
-        self.browser_manager = BrowserManager()
+        self.llm_manager = LLMManager(self)  # Pass self to LLMManager
+        self.browser_manager = BrowserManager(self)  # Pass self to BrowserManager
+
+    def reload_config(self):
+        global config
+        config = load_config()
+        self.llm_manager.update_config(config) 
+        self.browser_manager.update_config(config)
 
     def show_popup(self, selected_text):
+        self.reload_config() 
         print("Displaying popup window for instruction prompt...")
 
         def on_ok():
@@ -160,7 +164,8 @@ class UIManager:
         response_window.mainloop()
 
     def handle_llm_interaction(self, selected_text, instruction_prompt):
-        if config.PREFER_WEBVERSION.lower() in ["chatgpt", "claude", "gemini", "meta", "perplexity"]:
+        self.reload_config()  # Reload the config
+        if config.PREFER_WEBVERSION.lower() in ["chatgpt", "claude", "gemini", "meta", "perplexity", "copilot", "mistral", "you", "blackbox"]:
             print(f"Web version preferred: {config.PREFER_WEBVERSION}. Calling show_browser_window.")
             self.browser_manager.show_browser_window(selected_text, instruction_prompt)
         else:
