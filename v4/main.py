@@ -38,7 +38,7 @@ class Application:
                 copy_shortcut = (Key.ctrl, 'c')
             
             # Simulate the copy shortcut
-            with keyboard_controller.pressed(copy_shortcut[0]): #commented for debugging
+            with keyboard_controller.pressed(copy_shortcut[0]): 
                 keyboard_controller.press(copy_shortcut[1])
                 keyboard_controller.release(copy_shortcut[1])
                 print("Simulated pressing of Cntrl+C")
@@ -53,9 +53,6 @@ class Application:
         # Pass 'self' to on_activate:
         with keyboard.GlobalHotKeys({config.APPLICATION_SHORTCUT: lambda *args: on_activate(self)}) as h: 
             h.join() 
-
-
-
 
 
 
@@ -80,7 +77,3 @@ class Application:
 if __name__ == "__main__":
     app = Application()
     app.run()
-
-
-
-
