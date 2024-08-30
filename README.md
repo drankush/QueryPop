@@ -4,12 +4,13 @@
 
 # QueryPop 🎉
 
-QueryPop is a Python application called with a hotkey, that sends selected text (optional) from the clipboard to a Large Language Model (LLM) along with selected customizable inputs (selected from a pop-up) for processing and displays the response in a user-friendly pop-up window. Users can choose webversions of major LLM providers or use API key. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses (when using API key). This avoids need to getting distracted from what your are reading. Read comprehensive [use cases](https://github.com/drankush/QueryPop/#-use-cases).
+QueryPop is a Python application called with a hotkey, that sends selected text (or last from clipboard) to a Large Language Model (LLM) along with selected customizable inputs (selected from a pop-up) for processing and displays the response in a user-friendly pop-up window. Users can choose webversions of major LLM providers or use API key. This application is designed for macOS and Windows and provides functionality to handle text queries, display results, and save responses (when using API key). This avoids need to getting distracted from what your are reading. Read comprehensive [use cases](https://github.com/drankush/QueryPop/#-use-cases).
 
 ## ✨ Features 
 
 - **Clipboard Integration**: Automatically copies selected text and processes it from the clipboard.
 - **LLM Integration**: Sends text to a chosen Large Language Model by a provider (e.g., OpenAI) for processing. Accepts all OpenAI compatible API.
+- **Web-LLM Services**: Supports most web-based LLM services, just sign-in into your account on Chrome browser.
 - **Pop-Up Display**: Shows responses or errors in a graphical pop-up window.
 - **Markdown to HTML**: Converts markdown responses to HTML for enhanced readability.
 - **Response Saving**: Saves responses to a specified directory with timestamps.
@@ -48,20 +49,17 @@ QueryPop is a Python application called with a hotkey, that sends selected text 
     
     }
    ```
-3. **Appplication Shortcut**: You can set your own Appplication Shortcut. The default is ```Ctrl+Shift+.```.
+3. **Appplication Shortcut**: You can set your own Appplication Shortcut. If you change the application shortcut, then you will have to restart the application to implement it.
 
    ```python
-      APPLICATION_SHORTCUT = "<ctrl>+<shift>+."
+      APPLICATION_SHORTCUT = "<cmd>+'" # Command+ ' (the apostrophe) on macOS and Control+` (the backtick) on winOS
    ```
 
    - A list of available key names can be found [here](https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key).
 
+*The v4 provides optional support to web-based LLM service. It expects users to have Chrome browser installed, logged in to their account and granted [permissions](https://github.com/drankush/QueryPop#-permissions) to accessibility features in built in OS. As you cannot automatically or programmatically extract data or output, this approach is completely compliant with TOS of all LLM service providers.*
 
-## 🧪 Options for v4.0-beta
-
-*The v4 will provide optional support to web-based LLM service. It expects users to have Chrome browser installed, logged in to their account and granted [permissions](https://github.com/drankush/QueryPop#-permissions) to accessibility features in built in OS. As you cannot automatically or programmatically extract data or output, this approach is completely compliant with TOS of all LLM service providers.*
-
-4. **Preferred Web Version**: If instead of using API service, you wish to use the web version of LLM service you can input options for the supported services. Currently ```chatgpt```, ```claude```, ```gemini```, ```meta``` are supported. Leave blank or set to any other value to use API keys.
+4. **Preferred Web Version**: If instead of using API service, you wish to use the web version of LLM service you can input options for the supported services. Currently ```chatgpt```, ```claude```, ```gemini```, ```meta```, ```perplexity``` , ```mistral``` , ```blackbox``` , ```you``` are supported. Leave blank or set to any other value to use API keys.
    ```python
       PREFER_WEBVERSION = "chatgpt"
    ```  
@@ -71,7 +69,8 @@ QueryPop is a Python application called with a hotkey, that sends selected text 
       INPUT_DELAY = "5"  # (in seconds)
    ```
    
-6. **Browser Window Size**: This takes the format: {x-coordinate, y-coordinate, width, height}
+6. **Browser Window Size**: This takes the format: {x-coordinate, y-coordinate, width, height}. For windows only height and width are used.
+
    ```python
       BROWSER_WINDOW_SIZE = "{100,50,400,700}" # Keep no spaces.
    ```
@@ -81,9 +80,7 @@ QueryPop is a Python application called with a hotkey, that sends selected text 
 
 1. **Run the Application:**
    - The application will listen in the background for you to press the shortcut key and will open the instruction prompt window.
-   ```bash
-   python querypop.py
-   ```
+
 
 2. **Edit ```config.py```:**
    - In the tray icon ```QP```, click  ```Open Config``` and enter your API Details, Instruction Prompts and desired Application Shortcut. Restart the application after saving the config.py file.
@@ -100,10 +97,6 @@ QueryPop is a Python application called with a hotkey, that sends selected text 
           </div>
         </div>
       </div>
-
-
-
-
 
 
      
@@ -139,6 +132,7 @@ QueryPop is a versatile tool that can significantly boost your productivity in v
 - If you are using API the pop-up response is also returned to clipboard and can directly pasted (Cmd/Ctrl+V) in your application. 
 - You can always customise your frequently used instruction prompt and write as detail as required.
 - You can also choose enter your own prompt in the pop-up window.
+
 *These are some of the use cases:*
 
 1. **Instant Code Documentation**
