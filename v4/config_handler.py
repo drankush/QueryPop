@@ -35,12 +35,11 @@ INSTRUCTION_PROMPTS = {
 8: "Counterargument: 'Provide a well-reasoned counterargument to the following statement or claim:'",
 9: "Make Mnemonic: 'Create a mnemonic device to help remember the following information:'",
 10: "Real-World Application: 'Explain how the following concept can be applied in real life:'",
-11: "Code Optimization: 'Optimize the following code for better performance:'",
-12: "Code Commenting: 'Add meaningful comments to the following code to improve readability:'"
+11: "Code Commenting: 'Add meaningful comments to the following code to improve readability:'"
 }
 
 # Preferred Web Version (if applicable)
-# Options: "chatgpt", "claude", "gemini", "meta", "copilot", "blackbox", "you", "mistral". For automated input with blackbox, you, mistral use width to >870.
+# Options: "chatgpt", "claude", "gemini", "meta", "perplexity", "copilot", "blackbox", "you", "mistral". For automated input with blackbox, you, mistral use width to >870.
 # Leave blank or set to any other value to use API keys.
 PREFER_WEBVERSION = "chatgpt" 
 
@@ -54,7 +53,7 @@ INPUT_DELAY = "5"
 # - width: Width of the browser window in pixels.
 # - height: Height of the browser window in pixels.
 # - For blackbox, you, mistral use width >870; to be able to automate input.
-BROWSER_WINDOW_SIZE = "{100,50,450,700}" 
+BROWSER_WINDOW_SIZE = "{100,50,450,700}" # Keep no spaces.
 
 
 # Application Shortcut
