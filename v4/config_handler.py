@@ -5,6 +5,7 @@ import sys
 import subprocess
 
 DEFAULT_CONFIG_CONTENTS = """
+import os
 # Configuration file for the QueryPop application.
 
 # Users can customize the following settings:
@@ -62,9 +63,11 @@ BROWSER_WINDOW_SIZE = "{100,50,450,700}" # Keep no spaces.
 # For example, "<ctrl>+<shift>+." represents the shortcut Ctrl+Shift+.
 # A list of available key names can be found at: https://pynput.readthedocs.io/en/latest/keyboard.html#pynput.keyboard.Key
 # Look out for conflicts with the application you will be using.
-APPLICATION_SHORTCUT = "<cmd>+'" # The default shortcut is now Command + ' (the apostrophe key) for macOS to avoid conflits.
-
-""" 
+if os.name == "nt": #For Windows OS:-
+    APPLICATION_SHORTCUT = "<ctrl>+'" # The default shortcut is now Ctrl + ' (the apostrophe key)
+else: #For MacOS:-
+    APPLICATION_SHORTCUT = "<cmd>+'" # The default shortcut is now Command + ' (the apostrophe key) for macOS to avoid conflits.
+"""  
 
 
 
