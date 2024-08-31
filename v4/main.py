@@ -23,6 +23,7 @@ class Application:
     def __init__(self):
         self.root = tk.Tk()
         self.root.geometry("1x1")
+        self.root.wm_attributes('-toolwindow', True)
         self.ui_manager = UIManager(self.root)
 
 
