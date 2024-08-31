@@ -55,7 +55,7 @@ class UIManager:
             popup = Toplevel(self.root)
             popup.title("Instruction Prompt")
             if os.name == "nt":
-                initial_width = 800
+                initial_width = 1000
             else:
                 initial_width = 750
             initial_height = 330
